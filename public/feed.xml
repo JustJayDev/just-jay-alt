@@ -7,6 +7,13 @@
     <language>en</language>
     <atom:link href="https://justjaydev.github.io/feed.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>v5 — cinematic motion system + Roblox art fixed</title>
+      <link>https://justjaydev.github.io/games</link>
+      <guid>v5-cinematic</guid>
+      <pubDate>Sat, 20 Sep 2026 13:45:00 +0530</pubDate>
+      <description>Two things. First the bug: the Roblox banner never loaded because the file was SVG content saved with a .png extension — GitHub served it as image/png so browsers refused to render it. Renamed to .svg and it renders now. Second the overhaul: replaced the flat animations with a proper cinematic system — layered parallax orbs that drift with the pointer, a breathing glow on the avatar, poster-card sheen sweeps with corner brackets, a glow that follows the cursor across each game card, staggered spring pops on achievement badges, ripple feedback on every button, a gradient scroll-progress bar, and the casual classics strip is now an infinite marquee. Every effect respects prefers-reduced-motion and touch devices skip the pointer effects.</description>
+    </item>
+    <item>
       <title>v4.1 — game cards that don't crop your logos</title>
       <link>https://justjaydev.github.io/games</link>
       <guid>v41-game-cards</guid>

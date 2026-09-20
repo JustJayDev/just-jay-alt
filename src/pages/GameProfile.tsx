@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Copy, Check, User, Hash, Zap, Swords, Gamepad2 } from 'lucide-react';
 import sfx, { buzz } from '@/lib/sound';
+import { useRipple } from '@/lib/useCinematic';
 
 interface ProfileRow { label: string; value: string; icon: 'user' | 'hash'; }
 interface GameProfileData {
@@ -44,6 +45,7 @@ const PROFILES: Record<string, GameProfileData> = {
 
 const CopyRow: React.FC<{ row: ProfileRow }> = ({ row }) => {
   const [copied, setCopied] = useState(false);
+  const rippleRef = useRipple<HTMLButtonElement>();
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(row.value);
@@ -63,8 +65,9 @@ const CopyRow: React.FC<{ row: ProfileRow }> = ({ row }) => {
   const Icon = row.icon === 'user' ? User : Hash;
   return (
     <button
+      ref={rippleRef}
       onClick={copy}
-      className="w-full rounded-xl px-4 py-3.5 flex items-center gap-3 text-left active:scale-[0.99] transition-transform"
+      className="btn-magnet w-full rounded-xl px-4 py-3.5 flex items-center gap-3 text-left active:scale-[0.99] transition-transform"
       style={{
         background: 'var(--color-surface)',
         border: `1px solid ${copied ? 'color-mix(in srgb, #22c55e 55%, transparent)' : 'var(--color-border)'}`,
@@ -131,13 +134,13 @@ const GameProfilePage: React.FC = () => {
           <ArrowLeft size={16} /> All games
         </button>
 
-        <div className="relative rounded-3xl overflow-hidden" style={{ border: '1px solid var(--color-border)' }}>
+        <div className="poster-card relative rounded-3xl overflow-hidden" style={{ border: '1px solid var(--color-border)' }}>
           <img src={p.profileImage} alt={`${p.title} banner`} className="w-full h-52 md:h-72 object-cover" />
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 z-[2]"
             style={{ background: 'linear-gradient(to top, var(--color-bg) 4%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.35))' }}
           />
-          <div className="absolute bottom-4 left-5 right-5">
+          <div className="absolute bottom-4 left-5 right-5 z-[2]">
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-2xl md:text-4xl font-extrabold text-white" style={{ textShadow: '0 2px 14px rgba(0,0,0,0.85)' }}>
                 {p.title}
@@ -186,17 +189,21 @@ const GameProfilePage: React.FC = () => {
           Quick stats
         </h2>
         <div className="grid grid-cols-3 gap-2.5">
-          {p.stats.map((s) => (
-            <div
+          {p.stats.map((s, si) => (
+            <motion.div
               key={s.label}
-              className="rounded-xl px-3 py-4 text-center"
+              initial={{ opacity: 0, scale: 0.85 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: si * 0.08, type: 'spring', stiffness: 300, damping: 20 }}
+              className="poster-card rounded-xl px-3 py-4 text-center"
               style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
             >
-              <div className="text-lg md:text-xl font-extrabold gradient-text">{s.value}</div>
+              <div className="text-lg md:text-xl font-extrabold shimmer-text">{s.value}</div>
               <div className="mt-1 text-[10px] md:text-[11px] font-semibold uppercase tracking-wide" style={{ color: 'var(--color-text-muted)' }}>
                 {s.label}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

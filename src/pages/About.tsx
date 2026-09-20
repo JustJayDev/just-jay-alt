@@ -4,8 +4,10 @@ import { Gamepad2, Smartphone, Image as ImageIcon, Sparkles, ExternalLink } from
 import type { LucideIcon } from 'lucide-react';
 import { profile } from '@/data/profile';
 import { casualGames } from '@/data/games';
+import { useRipple } from '@/lib/useCinematic';
 
 const About: React.FC = () => {
+  const pixBtnRef = useRipple<HTMLAnchorElement>();
   return (
     <div className="page-container py-12 md:py-16">
       {/* Header */}
@@ -26,7 +28,8 @@ const About: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mt-10 max-w-2xl mx-auto rounded-2xl p-6 md:p-8"
+        className="mt-10 max-w-2xl mx-auto rounded-2xl p-6 md:p-8 reveal"
+        data-r="up"
         style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}
       >
         <p className="leading-relaxed" style={{ color: 'var(--color-text)' }}>
@@ -150,11 +153,12 @@ const About: React.FC = () => {
           ))}
         </div>
         <motion.a
+          ref={pixBtnRef}
           href="https://justjaydev.github.io/pixvault/"
           target="_blank"
           rel="noopener noreferrer"
           whileTap={{ scale: 0.97 }}
-          className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 font-bold text-sm text-white"
+          className="btn-shine btn-magnet mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 font-bold text-sm text-white"
           style={{ background: 'linear-gradient(135deg, var(--color-accent), var(--color-accent-2, #ec4899))' }}
         >
           <ImageIcon size={17} />
@@ -174,16 +178,18 @@ const About: React.FC = () => {
           <Gamepad2 size={22} style={{ color: 'var(--color-accent)' }} />
           Casual classics
         </h2>
-        <div className="flex flex-wrap gap-2 mt-4">
-          {casualGames.map((g) => (
-            <span
-              key={g}
-              className="text-xs px-3 py-1.5 rounded-full"
-              style={{ background: 'var(--color-surface-2)', color: 'var(--color-text-muted)' }}
-            >
-              {g}
-            </span>
-          ))}
+        <div className="marquee mt-4 -mx-2">
+          <div className="marquee__track gap-2 px-2">
+            {[...casualGames, ...casualGames].map((g, i) => (
+              <span
+                key={i}
+                className="text-xs px-3 py-1.5 rounded-full whitespace-nowrap"
+                style={{ background: 'var(--color-surface-2)', color: 'var(--color-text-muted)' }}
+              >
+                {g}
+              </span>
+            ))}
+          </div>
         </div>
       </motion.section>
 
