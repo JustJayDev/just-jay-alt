@@ -67,7 +67,7 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <div className="page-container h-14 flex items-center justify-between">
           <NavLink to="/" className="flex items-center gap-2">
             <img
-              src="/logo.svg"
+              src="/just-jay-alt/logo.svg"
               alt="JustJayDev logo"
               className="w-8 h-8 rounded-lg"
               style={{ boxShadow: '0 2px 10px color-mix(in srgb, var(--color-accent) 40%, transparent)' }}
@@ -150,7 +150,7 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               PixVault
             </a>
             <a
-              href="/feed.xml"
+              href="/just-jay-alt/feed.xml"
               className="inline-flex items-center gap-1 transition-colors hover:opacity-70 px-1.5"
               style={{ color: 'var(--color-text-muted)' }}
             >

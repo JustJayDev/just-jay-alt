@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          VITE_SITE_URL: https://JustJayDev.github.io/
+          VITE_SITE_URL: https://JustJayDev.github.io/just-jay-alt/
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:

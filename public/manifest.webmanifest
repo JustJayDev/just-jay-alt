@@ -48,7 +48,7 @@
   "shortcuts": [
     {
       "name": "Games",
-      "url": "/games",
+      "url": "/just-jay-alt/games",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -58,7 +58,7 @@
     },
     {
       "name": "Devlog",
-      "url": "/devlog",
+      "url": "/just-jay-alt/devlog",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -68,7 +68,7 @@
     },
     {
       "name": "About",
-      "url": "/about",
+      "url": "/just-jay-alt/about",
       "icons": [
         {
           "src": "icons/icon-192.png",

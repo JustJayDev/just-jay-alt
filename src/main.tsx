@@ -32,7 +32,7 @@ function dismissBoot() {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/just-jay-alt">
       <App />
     </BrowserRouter>
   </React.StrictMode>
